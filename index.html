@@ -1,0 +1,40 @@
+<html>
+<head>
+ <!-- Ugly Hack due to jsFiddle issue: http://goo.gl/BUfGZ --> 
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.0.4/css/bootstrap-combined.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<script src="app.js"></script>
+<style>
+.done-true {
+  text-decoration: line-through;
+  color: grey;
+}
+</style>
+</head>
+<body>
+<div ng-app="todoApp">
+	<div>
+		<h1>Define your goal here</h1>
+      <input type="text" ng-model="yourGoal"  size="100" placeholder="add new goal here">
+		<h1>Your defined goal is {{yourGoal}}!</h1>
+	</div>
+  <h2>Todo</h2>
+  <div ng-controller="TodoListController as todoList">
+    <span>{{todoList.remaining()}} of {{todoList.todos.length}} remaining</span>
+    [ <a href="" ng-click="todoList.archive()">archive</a> ]
+    <ul class="unstyled">
+      <li ng-repeat="todo in todoList.todos">
+        <input type="checkbox" ng-model="todo.done">
+        <span class="done-{{todo.done}}">{{todo.text}}</span>
+      </li>
+    </ul>
+    <form ng-submit="todoList.addTodo()">
+      <input type="text" ng-model="todoList.todoText"  size="30"
+             placeholder="add new todo here">
+      <input class="btn-primary" type="submit" value="add">
+    </form>
+  </div>
+</div>
+
+</body>
+</html>
